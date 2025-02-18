@@ -3,38 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instalador NFC</title>
-    <link rel="manifest" href="manifest.json">
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Lista de apps a descargar
-            const apps = [
-                "https://play.google.com/store/apps/details?id=com.microsoft.office.outlook",
-                "https://play.google.com/store/apps/details?id=com.microsoft.teams",
-                "https://play.google.com/store/apps/details?id=com.adobe.reader",
-                "https://play.google.com/store/apps/details?id=com.whatsapp.w4b",
-                "https://play.google.com/store/apps/details?id=com.anydesk.anydeskandroid",
-                "https://play.google.com/store/apps/details?id=com.anydesk.ad1"
-            ];
-            
-            // Abrir enlaces de apps en nuevas pestañas
-            apps.forEach(url => window.open(url, "_blank"));
-        });
-
-        function addShortcut(url) {
-            if (navigator.share) {
-                navigator.share({ title: "Añadir acceso", url: url });
-            } else {
-                alert("Para añadir el acceso manualmente, abre esta página en Chrome y usa 'Añadir a pantalla de inicio'.");
-            }
-        }
-    </script>
+    <title>Instalar Aplicaciones</title>
 </head>
 <body>
-    <h1>Instalador NFC</h1>
-    <p>Las aplicaciones se están descargando. Si no se abrieron, revisa las pestañas del navegador.</p>
-    
-    <h2>Añadir accesos directos</h2>
-    <button onclick="addShortcut('https://https://areaprofesional.renoveduch.com/')">Añadir Página 1</button>
+    <h1>Instalando aplicaciones...</h1>
+    <p>Si las instalaciones no comienzan automáticamente, toca los enlaces manualmente:</p>
+
+    <ul>
+        <li><a href="https://play.google.com/store/apps/details?id=com.microsoft.office.outlook">📧 Descargar Outlook</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.microsoft.teams">💼 Descargar Teams</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.adobe.reader">📄 Descargar Adobe Reader</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.whatsapp.w4b">💬 Descargar WhatsApp Business</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.anydesk.anydeskandroid">🔗 Descargar AnyDesk</a></li>
+    </ul>
+
+    <script>
+        // Lista de aplicaciones a instalar
+        const apps = [
+            "https://play.google.com/store/apps/details?id=com.microsoft.office.outlook",
+            "https://play.google.com/store/apps/details?id=com.microsoft.teams",
+            "https://play.google.com/store/apps/details?id=com.adobe.reader",
+            "https://play.google.com/store/apps/details?id=com.whatsapp.w4b",
+            "https://play.google.com/store/apps/details?id=com.anydesk.anydeskandroid",
+        ];
+
+        let delay = 1000; // Tiempo en milisegundos entre cada app (1 segundo)
+
+        function abrirSiguienteApp(index) {
+            if (index < apps.length) {
+                window.open(apps[index], "_blank");
+                setTimeout(() => abrirSiguienteApp(index + 1), delay);
+            }
+        }
+
+        // Iniciar instalación automática al cargar la página
+        window.onload = function() {
+            abrirSiguienteApp(0);
+        };
+    </script>
 </body>
 </html>
