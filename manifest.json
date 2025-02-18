@@ -1,7 +1,7 @@
 {
   "name": "Instalador NFC",
   "short_name": "NFC Installer",
-  "start_url": "/",
+  "start_url": "https://antoniorenoveduch.github.io/NFC/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
