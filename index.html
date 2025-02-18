@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
     <title>Instalar Aplicaciones</title>
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Agregar meta tags para la experiencia de pantalla completa en dispositivos móviles -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Instalar Aplicaciones">
+    
 </head>
 <body>
     <h1>Instalando aplicaciones...</h1>
@@ -41,12 +52,22 @@
             abrirSiguienteApp(0);
         };
     </script>
-    </head>
-<body>
+
     <h1>Instalador NFC</h1>
     <p>Las aplicaciones se están descargando. Si no se abrieron, revisa las pestañas del navegador.</p>
-    
+
     <h2>Añadir accesos directos</h2>
-    <button onclick="addShortcut('https://https://areaprofesional.renoveduch.com/')">Área Profesional</button>
+    <button onclick="addShortcut()">Añadir a la pantalla de inicio</button>
+
+    <script>
+        // Función para agregar un acceso directo a la pantalla de inicio
+        function addShortcut() {
+            if ('addToHomeScreen' in window) {
+                window.addToHomeScreen();
+            } else {
+                alert("Tu navegador o plataforma no soporta la adición de accesos directos a la pantalla de inicio.");
+            }
+        }
+    </script>
 </body>
 </html>
