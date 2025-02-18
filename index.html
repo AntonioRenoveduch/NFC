@@ -28,45 +28,36 @@
         <li><a href="https://play.google.com/store/apps/details?id=com.anydesk.anydeskandroid">🔗 Descargar AnyDesk</a></li>
     </ul>
 
-    <script>
-        // Lista de aplicaciones a instalar
-        const apps = [
-            "https://play.google.com/store/apps/details?id=com.microsoft.office.outlook",
-            "https://play.google.com/store/apps/details?id=com.microsoft.teams",
-            "https://play.google.com/store/apps/details?id=com.adobe.reader",
-            "https://play.google.com/store/apps/details?id=com.whatsapp.w4b",
-            "https://play.google.com/store/apps/details?id=com.anydesk.anydeskandroid",
-        ];
-
-        let delay = 1000; // Tiempo en milisegundos entre cada app (1 segundo)
-
-        function abrirSiguienteApp(index) {
-            if (index < apps.length) {
-                window.open(apps[index], "_blank");
-                setTimeout(() => abrirSiguienteApp(index + 1), delay);
-            }
-        }
-
-        // Iniciar instalación automática al cargar la página
-        window.onload = function() {
-            abrirSiguienteApp(0);
-        };
-    </script>
-
-    <h1>Instalador NFC</h1>
-    <p>Las aplicaciones se están descargando. Si no se abrieron, revisa las pestañas del navegador.</p>
-
-    <h2>Añadir accesos directos</h2>
+    <h2>Añadir acceso directo a la pantalla de inicio</h2>
     <button onclick="addShortcut()">Añadir a la pantalla de inicio</button>
 
     <script>
         // Función para agregar un acceso directo a la pantalla de inicio
         function addShortcut() {
-            if ('addToHomeScreen' in window) {
-                window.addToHomeScreen();
+            // Intentamos agregar el acceso directo
+            if ('serviceWorker' in navigator && 'PushManager' in window) {
+                if (navigator.serviceWorker.controller) {
+                    // Crear el acceso directo para redirigir a la URL deseada
+                    window.location.href = 'https://areaprofesional.renoveduch.com/';
+                } else {
+                    alert("Tu navegador no soporta la adición de accesos directos de manera directa.");
+                }
             } else {
-                alert("Tu navegador o plataforma no soporta la adición de accesos directos a la pantalla de inicio.");
+                alert("Tu navegador o plataforma no soporta la adición de accesos directos.");
             }
+        }
+    </script>
+
+    <script>
+        // Registrar el service worker si es necesario (opcional para PWA)
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(function(registration) {
+                    console.log('Service Worker registrado con éxito:', registration);
+                })
+                .catch(function(error) {
+                    console.log('Error al registrar el Service Worker:', error);
+                });
         }
     </script>
 </body>
